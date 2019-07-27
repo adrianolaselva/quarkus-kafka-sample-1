@@ -22,7 +22,7 @@ public class TransactionGenerator {
     @Outgoing("transactions")
     public Flowable<KafkaMessage<Integer, String>> generate() {
         Transaction transaction = new Transaction();
-        return Flowable.interval(5, TimeUnit.SECONDS)
+        return Flowable.interval(1000, TimeUnit.MILLISECONDS)
             .map(tick -> KafkaMessage.of(
                 random.nextInt(),
                 jsonb.toJson(transaction.setAmount(BigDecimal.valueOf(random.nextDouble())))
